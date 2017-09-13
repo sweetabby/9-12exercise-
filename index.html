@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myArray</title>
+</head>
+<body>
+ <script>
+ //构造数组
+   let arr=new myArray('a','b','c',1,2,3);
+   function myArray(){
+  	for(let i=0;i<arguments.length;i++){
+  		this[i]=arguments[i];
+  	}
+  	this.length=arguments.length;
+//push数组加
+  this.push=function(){
+  	for(i=0;i<arguments.length;i++){
+  		this[this.length]=arguments[i];
+  		this.length++;
+  	}
+  }
+//indexof
+  this.indexof=function(value){
+  	for(let i=0;i<this.length;i++){
+  		if(this[i]==value){
+  			return i;
+  		}
+  	}
+  	return -1;
+  }
+//lastindexof
+  this.lastindexof=function(value){
+  	for(let i=0;i<arguments.length;i++){
+  		if(this[i]==value){
+  			return i;
+  		}
+  	}
+  	return -1;
+  }
+//include
+   this.include=function(value){
+   	  for(let i=0;i<arguments.length;i++){
+   	  	 if(this[i]==value){
+   	  	 	return true;    //'ture'也可以，但其他地方不能调用，所以一般返回布尔值
+   	  	 }
+   	  }
+   	  return false;
+   }
+//reverse
+   this.reverse=function(){
+   	let newarr=new myArray();
+   	for(let i=this.length-1;i>=0;i--){
+   		newarr.push(this[i]);
+   	}
+   	return newarr;
+   }
+//join
+   this.join=function(str){
+   	let newarr=new myArray();
+   	for(let i=0;i<this.length;i++){
+   		newarr.push(this[i]+str);
+   	}
+   	return newarr;
+   }
+//sort up
+   this.sortup=function(){
+     let newarr=new myArray();
+     for(let i=0;i<this.length;i++){
+     	for(let j=i+1;j<this.length;j++){
+     		if(this[i]>this[j]){
+     			let temp=this[i];
+     			this[i]=this[j];
+	         	this[j]=temp;
+     		}
+     	}
+     }
+   }
+//sort  down
+	this.sortdown=function(){
+	 for(let i=0;i<this.length;i++){
+	  for(let j=i+1;j<this.length;j++){
+	   if(this[j]>this[i]){
+	    let temp=this[i];
+	    this[i]=this[j];
+	    this[j]=temp;
+	   }
+	  }
+	 } 
+ }
+//sort
+   this.sort=function(type){
+      type=type||'<';
+      if(type='<'){
+	    this.sortup();
+	   }
+	   if(type='>'){
+	    this.sortdown();
+	   }
+   }
+//some
+  this.some=function(fn){
+  	 for(let i=0;i<this.length;i++){
+  	 	if(fn(this[i])){
+  	 		return true;
+  	 	}
+  	 }
+  	 return false;
+  }
+//every
+  this.every=function(fn){
+  	 for(let i=0;i<this.length;i++){
+  	 	if(!fn(this[i])){
+  	 		return false;
+  	 	}
+  	 }
+  	 return true;
+  }
+//map映射（数组里的每个元素都执行回调函数，返回值作为新数组）
+   this.map=function(fn){
+   	let newarr=new myArray();
+   	for(let i=0;i<this.length;i++){
+   		newarr.push(fn(this[i]));
+   	}
+   	return newarr;
+   }
+//filter筛选（返回值为true的构成新数组）
+  this.filter=function(fn){
+  	let newarr=new myArray();
+  	for(let i=0;i<this.length;i++){
+  		if(fn(this[i])){
+  		    newarr.push(this[i]);	
+  		}
+  	}
+  	return newarr;
+  }
+//delnull
+  this.delnull=function(){
+  	let newarr=new myArray();
+  	for(let i=0;i<this.length;i++){
+  		if(this[i]!=undefined){
+           newarr.push(this[i]);
+  		}
+  	}
+  	return newarr;
+  }
+
+
+
+
+
+  }	
+  arr.push(4,5,6);
+  console.log(arr);
+  let index=arr.indexof('c');
+  console.log(index);
+  let last=arr.lastindexof('a');
+  console.log(last);
+  let result1=arr.include('a');
+  console.log(result1);
+  let result2=arr.reverse();
+  console.log(result2);
+  let result3=arr.join('-');
+  console.log(result3);
+  arr.sortup();
+  console.log(arr);
+  arr.sortdown();
+  console.log(arr);
+  arr.sort('<');
+  console.log(arr);
+  result4=arr.some(function(value){
+  	return typeof value=='number';
+  });
+  console.log(result4);
+  result5=arr.every(function(value){
+  	return typeof value=='number';
+  });
+  console.log(result5);
+  result6=arr.map(function(value){
+  	return value*2;
+  });
+  console.log(result6);
+  result7=arr.map(function(value){
+  	return value%2==0;
+  });
+  console.log(result7);
+  result8=arr.delnull();
+  console.log(result8);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </script>
+	
+</body>
+</html>
